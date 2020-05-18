@@ -1,4 +1,3 @@
-import './module'
+import './js/header'
 import './scss/index.scss'
 
-console.log('Working!')

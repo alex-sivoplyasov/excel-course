@@ -44,6 +44,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.8.7"
+    "@babel/polyfill": "^7.8.7",
+    "material-design-icons": "^3.0.1",
+    "normalize.css": "^8.0.1"
   }
 }
