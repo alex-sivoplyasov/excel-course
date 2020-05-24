@@ -19,7 +19,9 @@
     "object-curly-spacing": "off",
     "space-before-blocks": "off",
     "eol-last": "off",
-    "curly": "off"
+    "curly": "off",
+    "no-trailing-spaces": "off",
+    "operator-linebreak": "off"
   },
   "extends": [
     "eslint:recommended",

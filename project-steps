@@ -13,3 +13,14 @@
 3.3.7 npm install --save @babel/polyfill
 3.3.8 npm i eslint eslint-loader babel-eslint -D
 npm install --save-dev  eslint-config-google -D
+
+materials
+bind
+https://www.youtube.com/watch?v=UGapN-hrekw
+https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
+https://www.youtube.com/watch?v=fJqYa3BuwaU
+
+Курс по ноде
+https://www.youtube.com/watch?v=3aGSqasVPsI
+Курс по вебпак
+https://www.youtube.com/watch?v=eSaF8NXeNsA
