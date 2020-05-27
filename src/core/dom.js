@@ -14,6 +14,23 @@ class Dom {
         }
     }
 
+    findAll(selector) {
+        return this.$el.querySelectorAll(selector)
+    }
+
+    get data() {
+        return this.$el.dataset
+    }
+
+    closest(selector) {
+        return $(this.$el.closest(selector))
+    }
+
+    getCoords() {
+        return this.$el.getBoundingClientRect()
+    }
+
+
     clear() {
         this.html('')
         return this

@@ -6,24 +6,30 @@ const CODES = {
     Z: 90
 }
 
-function createCell() {
+function createCell(_, index) {
     return `
-        <div class="cell" contenteditable></div>
+        <div class="cell" contenteditable data-index="${index + 1}"></div>
     `
 }
 
 
-function toColumn(element) {
+function toColumn(element, index) {
     return `
-        <div class="column">${element}</div>
+        <div class="column" data-index="${index + 1}" data-type="resizable">
+            ${element}
+            <div class="col-resize" data-resize="col"></div>
+        </div>
     `
 }
 
 function createRow(columns, number = '') {
+    // eslint-disable-next-line max-len
+    const resizer = number ? '<div class="row-resize" data-resize="row"></div>' : ''
     return `
-        <div class="row">
+        <div class="row" data-type="resizable">
                 <div class="row-info">
                     ${number}
+                    ${resizer}
                 </div>
 
                 <div class="row-data">

@@ -8,8 +8,6 @@
     right: 0;
     overflow-x: auto;
     padding-bottom: 2px;
-    //overflow: scroll;
-    //height: $full-height - $header-height + $toolbar-height + $formula-height;
     height: calc(100% - #{$header-height + $toolbar-height + $formula-height});
 
     .row {
@@ -20,6 +18,7 @@
     }
 
     .row-info {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -28,6 +27,17 @@
         border: 1px solid $border-color;
         background: #f8f9fa;
         border-top: none;
+
+        .row-resize {
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            cursor: ns-resize;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
     }
 
     .row-data {
@@ -35,6 +45,7 @@
     }
 
     .column {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -45,6 +56,38 @@
         border-top: 0;
         border-left: 0;
         height: 100%;
+
+        .col-resize {
+            width: 4px;
+            height: 100%;
+            top: 0;
+            z-index: 1;
+
+            &.visible {
+                opacity: 1;
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: $formula-height;
+                    height: 100vh;
+                    width: 2px;
+                    background-color: $blue-color;
+                }
+            }
+
+            &:hover {
+                opacity: 1;
+                cursor: ew-resize;
+            }
+        }
+
+    }
+
+    .col-resize, .row-resize {
+        position: absolute;
+        right: 0;
+        opacity: 0;
+        background: $blue-color;
     }
 
     .cell {
@@ -60,7 +103,7 @@
         outline: none;
         &.selected {
             border: none;
-            outline: 2px solid #3c74ff;
+            outline: 2px solid $blue-color;
             z-index: 2;
         }
     }

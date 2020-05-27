@@ -4,7 +4,19 @@ export class Toolbar extends ExcelComponent {
     static className = 'excel__toolbar'
 
     constructor($root) {
-        super($root)
+        super($root, {
+            name: 'toolbar',
+            listeners: ['click']
+        })
+    }
+
+    onClick(e) {
+        if (e.target.classList.contains('material-icons')) {
+            const activeButton = document.querySelector('.button.active')
+            e.target.parentElement.classList.add('active')
+            if (activeButton)
+                activeButton.classList.remove('active')
+        }
     }
 
     toHTML() {
