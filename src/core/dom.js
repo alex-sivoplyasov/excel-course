@@ -14,6 +14,14 @@ class Dom {
         }
     }
 
+    addClass(className) {
+        this.$el.classList.add(className)
+    }
+
+    removeClass(className) {
+        this.$el.classList.remove(className)
+    }
+
     findAll(selector) {
         return this.$el.querySelectorAll(selector)
     }
@@ -30,6 +38,9 @@ class Dom {
         return this.$el.getBoundingClientRect()
     }
 
+    css(styles = {}) {
+        Object.assign(this.$el.style, styles)
+    }
 
     clear() {
         this.html('')

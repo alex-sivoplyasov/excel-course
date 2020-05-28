@@ -33,6 +33,21 @@
             left: 0;
             height: 4px;
             cursor: ns-resize;
+            z-index: 2;
+
+            &.resizing {
+                opacity: 1;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    top: 2px;
+                    left: $info-cell-width;
+                    height: 1px;
+                    width: 100vw;
+                    background-color: $blue-color;
+                    z-index: 2;
+                }
+            }
 
             &:hover {
                 opacity: 1;
@@ -63,14 +78,15 @@
             top: 0;
             z-index: 1;
 
-            &.visible {
+            &.resizing {
                 opacity: 1;
                 &:after {
                     content: '';
                     position: absolute;
                     top: $formula-height;
                     height: 100vh;
-                    width: 2px;
+                    width: 1px;
+                    left: 2px;
                     background-color: $blue-color;
                 }
             }

@@ -16,27 +16,42 @@ export class Table extends ExcelComponent {
         if (event.target.dataset.resize) {
             const $resizer = $(event.target)
             const $parent = $resizer.closest('[data-type="resizable"')
+            const type = $resizer.data.resize
             const coords = $parent.getCoords()
             const columnIndex = $parent.data.index
             const cells = this.$root.findAll(`.cell[data-index="${columnIndex}"]`)
             let delta
-            let newWidth
-            
+            let value
+
             document.onmousemove = e => {
-                delta = e.pageX - coords.right
-                newWidth = coords.width + delta
-                $resizer.$el.style.right = (0 - delta) + 'px'
-                $resizer.$el.classList.add('visible')
+                if ( type === 'col') {
+                    delta = e.pageX - coords.right
+                    value = coords.width + delta
+                    $resizer.css({right: -delta + 'px'})
+                } else {
+                    delta = e.pageY - coords.bottom
+                    value = coords.height + delta
+                    $resizer.css({bottom: -delta + 'px'})
+                }
+
+                $resizer.addClass('resizing')
             }
 
             document.onmouseup = () => {
+                document.onmouseup = null
                 document.onmousemove = null
-                $resizer.$el.style.right = 0
-                $resizer.$el.classList.remove('visible')
-                $parent.$el.style.width = newWidth + 'px'
-                cells.forEach( element => {
-                    element.style.width = newWidth + 'px'
-                })
+                if (type === 'col') {
+                    $resizer.css({right: 0})
+                    $parent.css({width: value + 'px'})
+                    cells.forEach( element => {
+                        $(element).css({width: value + 'px'})
+                    })
+                } else {
+                    $parent.css({height: value + 'px'})
+                    $resizer.css({bottom: 0})
+                }
+
+                $resizer.removeClass('resizing')
             }
         }
     }
@@ -44,7 +59,6 @@ export class Table extends ExcelComponent {
     onMouseup() {
 
     }
-
 
     onClick(e) {
         if (e.target.classList.contains('cell')) {
