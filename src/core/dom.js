@@ -22,6 +22,10 @@ class Dom {
         this.$el.classList.remove(className)
     }
 
+    find(selector) {
+        return $(this.$el.querySelector(selector))
+    }
+
     findAll(selector) {
         return this.$el.querySelectorAll(selector)
     }

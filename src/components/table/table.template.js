@@ -6,16 +6,28 @@ const CODES = {
     Z: 90
 }
 
-function createCell(_, index) {
-    return `
-        <div class="cell" contenteditable data-index="${index + 1}"></div>
-    `
-}
+// function createCell(col, row) {
+//     return `
+//         <div class="cell" contenteditable data-col="${col + 1}" data-row="${row + 1}"></div>
+//     `
+// }
 
+function createCell(row) {
+    return function(_, col) {
+        return `
+            <div 
+                class="cell" 
+                contenteditable 
+                data-col="${col + 1}" 
+                data-id="${row + 1}:${col + 1}">
+            </div>
+        `
+    }
+}
 
 function toColumn(element, index) {
     return `
-        <div class="column" data-index="${index + 1}" data-type="resizable">
+        <div class="column" data-col="${index + 1}" data-type="resizable">
             ${element}
             <div class="col-resize" data-resize="col"></div>
         </div>
@@ -57,14 +69,15 @@ export default function createTable(rowsCount = 10) {
     //Added colums to rows array
     rows.push(createRow(cols))
 
-    //Create empty cells
-    const cells = new Array(columnsCount)
-        .fill('')
-        .map(createCell)
-        .join('')
-
     //
     for (let i = 0; i < rowsCount; i++) {
+        const cells = new Array(columnsCount)
+            .fill('')
+            // .map( (_, index) => {
+            //     return createCell( index, i)
+            // })
+            .map(createCell(i))
+            .join('')
         rows.push(createRow(cells, i + 1))
     }
 

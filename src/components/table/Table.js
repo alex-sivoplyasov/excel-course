@@ -1,7 +1,9 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import createTable from '@/components/table/table.template';
-// import {$} from '@core/dom'
+import {$} from '@core/dom'
 import resizing from '@/components/table/table.resize';
+import {TableSelection} from '@/components/table/TableSelection';
+import {isResize, isSelect} from '@/components/table/table.functions';
 
 
 export class Table extends ExcelComponent {
@@ -10,28 +12,31 @@ export class Table extends ExcelComponent {
     constructor($root) {
         super($root, {
             name: 'Fromula',
-            listeners: ['click', 'mousedown', 'mouseup']
+            listeners: ['mousedown']
         })
     }
 
     onMousedown(event) {
-        if (event.target.dataset.resize) {
+        if (isResize(event)) {
             resizing(event, this.$root)
         }
-    }
 
-    onMouseup() {
-
-    }
-
-    onClick(e) {
-        if (e.target.classList.contains('cell')) {
-            const activeCell = document.querySelector('.cell.selected')
-            if (activeCell)
-                activeCell.classList.remove('selected')
-            e.target.classList.add('selected')
+        if (isSelect(event)) {
+            this.selection.select($(event.target))
         }
     }
+
+
+    prepare() {
+        this.selection = new TableSelection()
+    }
+
+    init() {
+        super.init()
+        const firstCell = this.$root.find('[data-id="1:1"]')
+        this.selection.select(firstCell)
+    }
+
 
     toHTML() {
         return createTable()

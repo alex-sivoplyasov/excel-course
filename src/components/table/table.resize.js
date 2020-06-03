@@ -5,8 +5,8 @@ export default function resizing(event, $root) {
     const $parent = $resizer.closest('[data-type="resizable"')
     const type = $resizer.data.resize
     const coords = $parent.getCoords()
-    const columnIndex = $parent.data.index
-    const cells = $root.findAll(`.cell[data-index="${columnIndex}"]`)
+    const columnIndex = $parent.data.col
+    const cells = $root.findAll(`.cell[data-col="${columnIndex}"]`)
     let delta
     let value
 
