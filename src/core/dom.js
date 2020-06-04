@@ -59,6 +59,18 @@ class Dom {
         this.$el.removeEventListener(listener, callback)
     }
 
+    id(parse) {
+        if (parse) {
+            const id = this.id()
+            const coords = id.split(':')
+            return {
+                row: +coords[0],
+                col: +coords[1]
+            }
+        }
+        return this.$el.dataset.id
+    }
+
     append(node) {
         typeof node === 'object'
             ? this.$el.append(node.$el)

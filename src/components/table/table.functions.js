@@ -5,3 +5,7 @@ export function isResize(event) {
 export function isSelect(event) {
     return event.target.classList.contains('cell')
 }
+
+export function getCellsGroup() {
+    
+}

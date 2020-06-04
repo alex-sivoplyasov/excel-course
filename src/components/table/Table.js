@@ -4,6 +4,7 @@ import {$} from '@core/dom'
 import resizing from '@/components/table/table.resize';
 import {TableSelection} from '@/components/table/TableSelection';
 import {isResize, isSelect} from '@/components/table/table.functions';
+import {range} from '@core/utils';
 
 
 export class Table extends ExcelComponent {
@@ -22,7 +23,23 @@ export class Table extends ExcelComponent {
         }
 
         if (isSelect(event)) {
-            this.selection.select($(event.target))
+            if (event.shiftKey) {
+                const target = $(event.target).id(true)
+                const current = this.selection.current.id(true)
+                const cols = range(target.col, current.col)
+                const rows = range(target.row, current.row)
+                const ids = cols.reduce( (accumulator, currentValue) => {
+                    rows.forEach( (element) => {
+                        accumulator.push(element + ':' + currentValue)
+                    })
+                    return accumulator
+                }, [])
+
+                const cells = ids.map( id => $(`.cell[data-id="${id}"]`))
+                this.selection.selectGroup(cells)
+            } else {
+                this.selection.select($(event.target))
+            }
         }
     }
 

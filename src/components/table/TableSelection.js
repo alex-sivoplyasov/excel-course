@@ -1,21 +1,30 @@
-import {$} from '@core/dom'
+// import {$} from '@core/dom'
 
 export class TableSelection {
+    static className = 'selected'
     constructor() {
         this.group = []
+        this.current = null
     }
 
     //cell instance of DOM class
     select(cell) {
+        this.clear()
+        cell.addClass(TableSelection.className)
         this.group.push(cell)
-        const activeCell = $('.cell.selected')
-        if (activeCell.$el)
-            activeCell.removeClass('selected')
-
-        cell.addClass('selected')
+        this.current = cell
     }
 
-    selectGroup() {
+    selectGroup(cells) {
+        this.clear()
+        this.group = cells
+        cells.forEach( cell => cell.addClass(TableSelection.className))
+    }
 
+    clear() {
+        this.group.forEach( cell => {
+            cell.removeClass(TableSelection.className)
+        })
+        this.group = []
     }
 }
