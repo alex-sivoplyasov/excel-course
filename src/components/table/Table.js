@@ -3,17 +3,24 @@ import createTable from '@/components/table/table.template';
 import {$} from '@core/dom'
 import resizing from '@/components/table/table.resize';
 import {TableSelection} from '@/components/table/TableSelection';
-import {isResize, isSelect} from '@/components/table/table.functions';
-import {range} from '@core/utils';
+import {
+    getCellsGroup,
+    isResize,
+    isSelect,
+    getNextElement
+} from '@/components/table/table.functions';
 
 
 export class Table extends ExcelComponent {
     static className = 'excel__table'
+    static rowsCount = 15
+    static columnsCount = null
 
-    constructor($root) {
+    constructor($root, options) {
         super($root, {
-            name: 'Fromula',
-            listeners: ['mousedown']
+            name: 'Table',
+            listeners: ['mousedown', 'keydown'],
+            ...options
         })
     }
 
@@ -26,16 +33,7 @@ export class Table extends ExcelComponent {
             if (event.shiftKey) {
                 const target = $(event.target).id(true)
                 const current = this.selection.current.id(true)
-                const cols = range(target.col, current.col)
-                const rows = range(target.row, current.row)
-                const ids = cols.reduce( (accumulator, currentValue) => {
-                    rows.forEach( (element) => {
-                        accumulator.push(element + ':' + currentValue)
-                    })
-                    return accumulator
-                }, [])
-
-                const cells = ids.map( id => $(`.cell[data-id="${id}"]`))
+                const cells = getCellsGroup(target, current)
                 this.selection.selectGroup(cells)
             } else {
                 this.selection.select($(event.target))
@@ -43,9 +41,34 @@ export class Table extends ExcelComponent {
         }
     }
 
+    onKeydown(event) {
+        const keys = [
+            'Enter',
+            'Tab',
+            'ArrowUp',
+            'ArrowLeft',
+            'ArrowDown',
+            'ArrowRight'
+        ]
+
+        const key = event.code
+
+        if (keys.includes(key) && !event.shiftKey) {
+            event.preventDefault()
+            const ids = this.selection.current.id(true)
+            const $next = getNextElement(key, ids)
+            this.selection.select($next)
+        }
+    }
 
     prepare() {
         this.selection = new TableSelection()
+        this.emitter.subscribe('formulaInput', this.formulaInput.bind(this))
+    }
+
+    formulaInput(data) {
+        // console.log(this.selection.current.$el.innerText = data)
+        this.selection.current.text(data)
     }
 
     init() {
@@ -56,6 +79,6 @@ export class Table extends ExcelComponent {
 
 
     toHTML() {
-        return createTable()
+        return createTable(Table.rowsCount)
     }
 }

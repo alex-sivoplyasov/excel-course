@@ -13,6 +13,7 @@ export class TableSelection {
         cell.addClass(TableSelection.className)
         this.group.push(cell)
         this.current = cell
+        cell.focus()
     }
 
     selectGroup(cells) {

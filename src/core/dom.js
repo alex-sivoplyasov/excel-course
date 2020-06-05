@@ -14,6 +14,15 @@ class Dom {
         }
     }
 
+    text(text) {
+        if (text) {
+            this.$el.textContent = text
+            return this
+        } else {
+            return this.$el.textContent
+        }
+    }
+
     addClass(className) {
         this.$el.classList.add(className)
     }
@@ -75,6 +84,10 @@ class Dom {
         typeof node === 'object'
             ? this.$el.append(node.$el)
             : this.$el.append(node)
+    }
+
+    focus() {
+        this.$el.focus()
     }
 }
 

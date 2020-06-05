@@ -1,6 +1,8 @@
 // import {$} from '@core/dom'
 
 //Char codes for symbols
+import {Table} from '@/components/table/Table';
+
 const CODES = {
     A: 65,
     Z: 90
@@ -57,6 +59,7 @@ function toChar(_, index) {
 
 export default function createTable(rowsCount = 10) {
     const columnsCount = CODES.Z - CODES.A + 1
+    Table.columnsCount = columnsCount
     const rows = []
 
     //create columns A-Z

@@ -1,27 +1,22 @@
-import {ExcelComponent} from '@core/ExcelComponent';
+import {ExcelComponent} from '@core/ExcelComponent'
+// import {Emitter} from '@core/Emitter';
+
 
 export class Formula extends ExcelComponent {
     static className = 'excel__formula'
 
-    constructor($root) {
+    constructor($root, options) {
         super($root, {
             name: 'Fromula',
-            listeners: ['input', 'click']
+            listeners: ['input'],
+            ...options
         })
     }
 
     onInput(event) {
-        console.log(event)
+        const text = event.target.innerText
+        this.emitter.emit('formulaInput', text)
     }
-
-    onClick(event) {
-        // console.log(this.$root)
-        console.log(event)
-    }
-
-    // remove(event) {
-    //     console.log('event')
-    // }
 
     toHTML() {
         return `
