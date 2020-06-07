@@ -1,27 +1,30 @@
-import {ExcelComponent} from '@core/ExcelComponent';
+import {ExcelComponent} from '@core/ExcelComponent'
+// import {Emitter} from '@core/Emitter';
+
 
 export class Formula extends ExcelComponent {
     static className = 'excel__formula'
 
-    constructor($root) {
+    constructor($root, options) {
         super($root, {
             name: 'Fromula',
-            listeners: ['input', 'click']
+            listeners: ['input', 'keydown'],
+            ...options
         })
     }
 
     onInput(event) {
-        console.log(event)
+        const text = event.target.innerText
+        this.$emit('formula:input', text)
     }
 
-    onClick(event) {
-        // console.log(this.$root)
-        console.log(event)
+    onKeydown(event) {
+        const keys = ['Enter', 'Tab']
+        if (keys.includes(event.key)) {
+            event.preventDefault()
+            this.$emit('formula:enter')
+        }
     }
-
-    // remove(event) {
-    //     console.log('event')
-    // }
 
     toHTML() {
         return `
@@ -31,5 +34,16 @@ export class Formula extends ExcelComponent {
 
             <div class="input" contenteditable spellcheck="false"></div>
         `
+    }
+
+    prepare() {
+        this.$subscribe('table:input', (data) => {
+            // console.log(this.$root.find('input'))
+            this.$root.find('.input').text(data)
+        })
+
+        this.$subscribe('table:select', (data) => {
+            this.$root.find('.input').text(data)
+        })
     }
 }

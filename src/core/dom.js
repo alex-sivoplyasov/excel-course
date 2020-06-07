@@ -14,12 +14,27 @@ class Dom {
         }
     }
 
+    text(text) {
+        if (text) {
+            this.$el.textContent = text
+            return this
+        } else {
+            return this.$el.textContent
+        }
+    }
+
     addClass(className) {
         this.$el.classList.add(className)
+        return this
     }
 
     removeClass(className) {
         this.$el.classList.remove(className)
+        return this
+    }
+
+    find(selector) {
+        return $(this.$el.querySelector(selector))
     }
 
     findAll(selector) {
@@ -55,10 +70,26 @@ class Dom {
         this.$el.removeEventListener(listener, callback)
     }
 
+    id(parse) {
+        if (parse) {
+            const id = this.id()
+            const coords = id.split(':')
+            return {
+                row: +coords[0],
+                col: +coords[1]
+            }
+        }
+        return this.$el.dataset.id
+    }
+
     append(node) {
         typeof node === 'object'
             ? this.$el.append(node.$el)
             : this.$el.append(node)
+    }
+
+    focus() {
+        this.$el.focus()
     }
 }
 
@@ -70,9 +101,9 @@ $.create = (tagName, classes = '') => {
     const newElement = document.createElement(tagName)
     if (classes) {
         classes = classes.split(' ')
-        classes.forEach( (className) => {
+        classes.forEach((className) => {
             newElement.classList.add(className)
-        } )
+        })
     }
     return $(newElement)
 }
