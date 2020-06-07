@@ -25,10 +25,12 @@ class Dom {
 
     addClass(className) {
         this.$el.classList.add(className)
+        return this
     }
 
     removeClass(className) {
         this.$el.classList.remove(className)
+        return this
     }
 
     find(selector) {
@@ -99,9 +101,9 @@ $.create = (tagName, classes = '') => {
     const newElement = document.createElement(tagName)
     if (classes) {
         classes = classes.split(' ')
-        classes.forEach( (className) => {
+        classes.forEach((className) => {
             newElement.classList.add(className)
-        } )
+        })
     }
     return $(newElement)
 }

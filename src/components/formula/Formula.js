@@ -8,14 +8,22 @@ export class Formula extends ExcelComponent {
     constructor($root, options) {
         super($root, {
             name: 'Fromula',
-            listeners: ['input'],
+            listeners: ['input', 'keydown'],
             ...options
         })
     }
 
     onInput(event) {
         const text = event.target.innerText
-        this.emitter.emit('formulaInput', text)
+        this.$emit('formula:input', text)
+    }
+
+    onKeydown(event) {
+        const keys = ['Enter', 'Tab']
+        if (keys.includes(event.key)) {
+            event.preventDefault()
+            this.$emit('formula:enter')
+        }
     }
 
     toHTML() {
@@ -26,5 +34,16 @@ export class Formula extends ExcelComponent {
 
             <div class="input" contenteditable spellcheck="false"></div>
         `
+    }
+
+    prepare() {
+        this.$subscribe('table:input', (data) => {
+            // console.log(this.$root.find('input'))
+            this.$root.find('.input').text(data)
+        })
+
+        this.$subscribe('table:select', (data) => {
+            this.$root.find('.input').text(data)
+        })
     }
 }

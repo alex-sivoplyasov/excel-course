@@ -22,9 +22,14 @@ export class Excel {
 
         return $root
     }
+
     render() {
         this.$el.append(this.getRoot())
         this.components.forEach( component => component.init())
         // this.components.forEach(component => component.destroy())
+    }
+
+    destroy() {
+        this.components.forEach( component => component.destroy())
     }
 }

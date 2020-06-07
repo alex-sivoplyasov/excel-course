@@ -22,6 +22,7 @@ function createCell(row) {
                 contenteditable 
                 data-col="${col + 1}" 
                 data-id="${row + 1}:${col + 1}">
+                11
             </div>
         `
     }
