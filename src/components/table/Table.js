@@ -9,6 +9,9 @@ import {
     isSelect,
     getNextElement
 } from '@/components/table/table.functions';
+// import {TABLE_RESIZE} from '@/redux/types';
+import {tableResize} from '@/redux/actions';
+// import {storage} from '@core/utils';
 
 
 export class Table extends ExcelComponent {
@@ -24,10 +27,19 @@ export class Table extends ExcelComponent {
         })
     }
 
+    async resizeTable(event) {
+        try {
+            const data = await resizing(event, this.$root)
+            // const test = tableResize(data)
+            this.$dispatch(tableResize(data))
+        } catch (e) {
+            console.warn('Resize error: ', e.message)
+        }
+    }
+
     onMousedown(event) {
         if (isResize(event)) {
-            resizing(event, this.$root)
-            console.log('resize')
+            this.resizeTable(event)
         }
 
         if (isSelect(event)) {
@@ -86,8 +98,6 @@ export class Table extends ExcelComponent {
         super.init()
         const firstCell = this.$root.find('[data-id="1:1"]')
         this.selectCell(firstCell)
-        // this.selection.select(firstCell)
-        // this.$emit('table:select', firstCell.text())
     }
 
     selectCell(cell) {
@@ -97,6 +107,6 @@ export class Table extends ExcelComponent {
 
 
     toHTML() {
-        return createTable(Table.rowsCount)
+        return createTable(Table.rowsCount, this.store.getState())
     }
 }

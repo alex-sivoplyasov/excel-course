@@ -21,6 +21,7 @@ class Dom {
         } else {
             return this.$el.textContent
         }
+        // this.$el.textContent = text
     }
 
     addClass(className) {

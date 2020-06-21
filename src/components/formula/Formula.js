@@ -7,7 +7,7 @@ export class Formula extends ExcelComponent {
 
     constructor($root, options) {
         super($root, {
-            name: 'Fromula',
+            name: 'Formula',
             listeners: ['input', 'keydown'],
             ...options
         })
@@ -40,6 +40,7 @@ export class Formula extends ExcelComponent {
         this.$subscribe('table:input', (data) => {
             // console.log(this.$root.find('input'))
             this.$root.find('.input').text(data)
+            console.log(data)
         })
 
         this.$subscribe('table:select', (data) => {
