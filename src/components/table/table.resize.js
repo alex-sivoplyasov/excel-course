@@ -40,7 +40,11 @@ export default function resizing(event, $root) {
             }
 
             $resizer.removeClass('resizing')
-            resolve({value, id: type === 'col' ? $parent.data.col : ''})
+            resolve({
+                value,
+                id: type === 'col' ? columnIndex : $parent.data.row,
+                type
+            })
         }
     })
 }

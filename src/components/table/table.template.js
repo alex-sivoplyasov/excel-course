@@ -9,6 +9,7 @@ const CODES = {
 }
 
 const DEFAULT_WIDTH = 120
+const DEFAULT_HEIGHT = 24
 
 function createCell(state, row) {
     return function(_, col) {
@@ -36,11 +37,15 @@ function toColumn(el) {
     `
 }
 
-function createRow(columns, number = '') {
-    // eslint-disable-next-line max-len
-    const resizer = number ? '<div class="row-resize" data-resize="row"></div>' : ''
+function createRow(columns, number = '', state) {
+    const resizer = number ?
+        '<div class="row-resize" data-resize="row"></div>' :
+        ''
+    const height = number ?
+        getHeight(number, state.rowState) :
+        DEFAULT_HEIGHT
     return `
-        <div class="row" data-type="resizable">
+        <div class="row" data-type="resizable" data-row="${number}" style="height: ${height}">
                 <div class="row-info">
                     ${number}
                     ${resizer}
@@ -55,6 +60,10 @@ function createRow(columns, number = '') {
 
 function toChar(_, index) {
     return String.fromCharCode(CODES.A + index)
+}
+
+function getHeight(index, state) {
+    return (state[index] || DEFAULT_HEIGHT) + 'px'
 }
 
 function getWidth(index, state) {
@@ -85,13 +94,12 @@ export default function createTable(rowsCount = 10, state = {}) {
     //Added colums to rows array
     rows.push(createRow(cols))
 
-    //
     for (let i = 0; i < rowsCount; i++) {
         const cells = new Array(columnsCount)
             .fill('')
             .map(createCell(state, i))
             .join('')
-        rows.push(createRow(cells, i + 1))
+        rows.push(createRow(cells, i + 1, state))
     }
 
     return rows.join('')

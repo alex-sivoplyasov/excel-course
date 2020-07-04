@@ -12,6 +12,7 @@ export function createStore(rootReducer, initialState = {}) {
             }
         },
         dispatch(action) {
+            // console.log('action: ', action)
             state = rootReducer(state, action)
             listeners.forEach( listener => listener(state))
         },
@@ -20,27 +21,3 @@ export function createStore(rootReducer, initialState = {}) {
         }
     }
 }
-
-// class createStore {
-//     constructor(rootReducer, initialState = {}) {
-//         this.state = rootReducer(...initialState, {type: '__INIT__'})
-//         this.listeners = []
-//     }
-//
-//     subscribe(fn) {
-//         this.listeners.push(fn)
-//         return () => {
-//             this.listeners.filter( listener => listener !== fn)
-//         }
-//
-//     }
-//
-//     dispatch(action) {
-//         this.state = rootReducer(this.state, action)
-//         this.listeners.forEach( listener => listener(this.state))
-//     }
-//
-//     getState() {
-//
-//     }
-// }
