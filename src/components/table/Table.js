@@ -10,7 +10,8 @@ import {
     getNextElement
 } from '@/components/table/table.functions';
 // import {TABLE_RESIZE} from '@/redux/types';
-import {tableResize} from '@/redux/actions';
+import {cellContentAction, tableResize} from '@/redux/actions';
+// import {CELLS_CONTENT} from '@/redux/types';
 // import {storage} from '@core/utils';
 
 
@@ -49,14 +50,20 @@ export class Table extends ExcelComponent {
                 const cells = getCellsGroup(target, current)
                 this.selection.selectGroup(cells)
             } else {
-                this.selection.select($(event.target))
+                this.selection.select($(event.target), this)
             }
         }
     }
 
     onInput(event) {
         const text = event.target.textContent
+        const cellId = $(event.target).data.id
+        const data = {
+            id: cellId,
+            value: text
+        }
         this.$emit('table:input', text)
+        this.$dispatch(cellContentAction(data))
     }
 
     onKeydown(event) {
@@ -95,12 +102,14 @@ export class Table extends ExcelComponent {
 
     init() {
         super.init()
-        const firstCell = this.$root.find('[data-id="1:1"]')
+        const startCellId = this.store.getState().activeCell
+        const firstCell = this.$root.find(`[data-id="${startCellId}"]`)
+
         this.selectCell(firstCell)
     }
 
     selectCell(cell) {
-        this.selection.select(cell)
+        this.selection.select(cell, this)
         this.$emit('table:select', cell.text())
     }
 

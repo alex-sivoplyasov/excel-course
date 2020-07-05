@@ -14,14 +14,17 @@ const DEFAULT_HEIGHT = 24
 function createCell(state, row) {
     return function(_, col) {
         const width = getWidth(col, state.colState)
+        const id = `${row + 1}:${col + 1}`
+        const content = getContent(id, state.cellsContent)
         return `
             <div 
                 class="cell" 
                 contenteditable 
                 data-col="${col + 1}" 
-                data-id="${row + 1}:${col + 1}"
+                data-id="${id}"
                 style="width: ${width}"
                 >
+                ${content}
             </div>
         `
     }
@@ -76,6 +79,11 @@ function withWidthFrom(state) {
             element, index, width: getWidth(index, state.colState)
         }
     }
+}
+
+function getContent(id, state) {
+    // console.log(state)
+    return state[id] || ''
 }
 
 export default function createTable(rowsCount = 10, state = {}) {
