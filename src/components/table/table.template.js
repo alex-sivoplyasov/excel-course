@@ -82,7 +82,6 @@ function withWidthFrom(state) {
 }
 
 function getContent(id, state) {
-    // console.log(state)
     return state[id] || ''
 }
 

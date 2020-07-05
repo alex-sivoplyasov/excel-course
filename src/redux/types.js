@@ -1,3 +1,2 @@
 export const TABLE_RESIZE = 'TABLE_RESIZE'
 export const CELLS_CONTENT = 'CELLS_CONTENT'
-export const ACTIVE_CELL = 'ACTIVE_CELL'

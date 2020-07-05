@@ -1,4 +1,4 @@
-import {ACTIVE_CELL, CELLS_CONTENT, TABLE_RESIZE} from '@/redux/types';
+import {CELLS_CONTENT, TABLE_RESIZE} from '@/redux/types';
 
 export function tableResize(data) {
     return {
@@ -14,9 +14,3 @@ export function cellContentAction(data) {
     }
 }
 
-export function activeCellAction(cell) {
-    return {
-        type: ACTIVE_CELL,
-        data: cell
-    }
-}

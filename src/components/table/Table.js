@@ -50,7 +50,7 @@ export class Table extends ExcelComponent {
                 const cells = getCellsGroup(target, current)
                 this.selection.selectGroup(cells)
             } else {
-                this.selection.select($(event.target), this)
+                this.selection.select($(event.target))
             }
         }
     }
@@ -62,7 +62,7 @@ export class Table extends ExcelComponent {
             id: cellId,
             value: text
         }
-        this.$emit('table:input', text)
+        // this.$emit('table:input', text)
         this.$dispatch(cellContentAction(data))
     }
 
@@ -102,14 +102,12 @@ export class Table extends ExcelComponent {
 
     init() {
         super.init()
-        const startCellId = this.store.getState().activeCell
-        const firstCell = this.$root.find(`[data-id="${startCellId}"]`)
-
+        const firstCell = this.$root.find(`[data-id="1:1"]`)
         this.selectCell(firstCell)
     }
 
     selectCell(cell) {
-        this.selection.select(cell, this)
+        this.selection.select(cell)
         this.$emit('table:select', cell.text())
     }
 

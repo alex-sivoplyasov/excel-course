@@ -1,8 +1,3 @@
-// import {$} from '@core/dom'
-
-// import {ACTIVE_CELL} from '@/redux/types';
-import {activeCellAction} from '@/redux/actions';
-
 export class TableSelection {
     static className = 'selected'
     constructor() {
@@ -11,9 +6,7 @@ export class TableSelection {
     }
 
     //cell instance of DOM class
-    select(cell, self) {
-        const cellId = cell.data.id
-        self.$dispatch(activeCellAction(cellId))
+    select(cell) {
         this.clear()
         cell.addClass(TableSelection.className)
         this.group.push(cell)

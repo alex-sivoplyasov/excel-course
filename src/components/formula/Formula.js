@@ -37,9 +37,8 @@ export class Formula extends ExcelComponent {
     }
 
     prepare() {
-        this.$subscribe('table:input', (data) => {
-            // console.log(this.$root.find('input'))
-            this.$root.find('.input').text(data)
+        this.$sub( state => {
+            this.$root.find('.input').text(state.currentText)
         })
 
         this.$subscribe('table:select', (data) => {
