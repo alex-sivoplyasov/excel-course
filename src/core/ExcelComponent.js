@@ -8,6 +8,7 @@ export class ExcelComponent extends DomListener{
         this.store = options.store
         this.unsubscribers = []
         this.storeSub = null
+        this.subscribe = options.subscribe || []
         this.prepare()
     }
 
@@ -32,10 +33,22 @@ export class ExcelComponent extends DomListener{
         this.store.dispatch(action)
     }
 
-    //Подписка redux
-    $sub(fn) {
-        this.storeSub = this.store.subscribe(fn)
+    //Приходят только те изменения, на которые подписались
+    storeChanged(changes) {
+
     }
+
+    isWatching(key) {
+        // console.log(this.subscribe.includes(key))
+        // console.log(this.subscribe)
+        // console.log(key)
+        return this.subscribe.includes(key)
+    }
+
+    //Подписка redux
+    // $sub(fn) {
+    //     this.storeSub = this.store.subscribe(fn)
+    // }
 
 
     //Возвращает шаблон компонента
