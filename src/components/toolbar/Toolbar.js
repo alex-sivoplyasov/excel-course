@@ -1,5 +1,6 @@
 import {ExcelComponent} from '@core/ExcelComponent';
-
+import {createToolbar} from '@/components/toolbar/toolbar.template';
+import {$} from '@core/dom'
 export class Toolbar extends ExcelComponent {
     static className = 'excel__toolbar'
 
@@ -12,6 +13,10 @@ export class Toolbar extends ExcelComponent {
     }
 
     onClick(e) {
+        // console.log(e.target)
+        if ($(e.target).data.type === 'button') {
+            console.log( $(e.target).data.value)
+        }
         if (e.target.classList.contains('material-icons')) {
             const activeButton = document.querySelector('.button.active')
             e.target.parentElement.classList.add('active')
@@ -21,39 +26,6 @@ export class Toolbar extends ExcelComponent {
     }
 
     toHTML() {
-        return `
-                        <div class="button">
-                    <span class="material-icons">
-                        format_align_left
-                    </span>
-            </div>
-            <div class="button">
-                    <span class="material-icons">
-                        format_align_center
-                    </span>
-            </div>
-            <div class="button">
-                    <span class="material-icons">
-                        format_align_right
-                    </span>
-            </div>
-            <div class="button">
-                    <span class="material-icons">
-                        format_bold
-                    </span>
-            </div>
-
-            <div class="button">
-                    <span class="material-icons">
-                        format_italic
-                    </span>
-            </div>
-
-            <div class="button">
-                    <span class="material-icons">
-                        format_underline
-                    </span>
-            </div>
-        `
+        return createToolbar()
     }
 }
