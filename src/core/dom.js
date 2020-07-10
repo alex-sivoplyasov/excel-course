@@ -58,6 +58,13 @@ class Dom {
         Object.assign(this.$el.style, styles)
     }
 
+    getStyles(styles = []) {
+        return styles.reduce( (res, s) => {
+            res[s] = this.$el.style[s]
+            return res
+        }, {})
+    }
+
     clear() {
         this.html('')
         return this

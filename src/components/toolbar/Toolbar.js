@@ -1,7 +1,9 @@
-import {ExcelComponent} from '@core/ExcelComponent';
 import {createToolbar} from '@/components/toolbar/toolbar.template';
 import {$} from '@core/dom'
-export class Toolbar extends ExcelComponent {
+import {ExcelComponentState} from '@core/ExcelComponentState';
+import {defaultStyles} from '@/constants';
+
+export class Toolbar extends ExcelComponentState {
     static className = 'excel__toolbar'
 
     constructor($root, options) {
@@ -15,17 +17,22 @@ export class Toolbar extends ExcelComponent {
     onClick(e) {
         // console.log(e.target)
         if ($(e.target).data.type === 'button') {
-            console.log( $(e.target).data.value)
-        }
-        if (e.target.classList.contains('material-icons')) {
-            const activeButton = document.querySelector('.button.active')
-            e.target.parentElement.classList.add('active')
-            if (activeButton)
-                activeButton.classList.remove('active')
+            const value = JSON.parse($(e.target).data.value)
+            this.$emit('toolbar:ApplyStyle', value)
+            const key = Object.keys(value)[0]
+            this.setState({[key]: value[key]})
         }
     }
 
+    prepare() {
+        this.initState(defaultStyles)
+    }
+
+    get template() {
+        return createToolbar(this.state)
+    }
+
     toHTML() {
-        return createToolbar()
+        return this.template
     }
 }

@@ -26,4 +26,10 @@ export class TableSelection {
         })
         this.group = []
     }
+
+    applyStyle(style) {
+        this.group.forEach( cell => {
+            cell.css(style)
+        })
+    }
 }

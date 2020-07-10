@@ -11,6 +11,7 @@ import {
 } from '@/components/table/table.functions';
 // import {TABLE_RESIZE} from '@/redux/types';
 import {cellContentAction, tableResize} from '@/redux/actions';
+import {defaultStyles} from '@/constants';
 // import {CELLS_CONTENT} from '@/redux/types';
 // import {storage} from '@core/utils';
 
@@ -50,7 +51,8 @@ export class Table extends ExcelComponent {
                 const cells = getCellsGroup(target, current)
                 this.selection.selectGroup(cells)
             } else {
-                this.selection.select($(event.target))
+                // this.selection.select($(event.target))
+                this.selectCell($(event.target))
             }
         }
     }
@@ -104,6 +106,9 @@ export class Table extends ExcelComponent {
         super.init()
         const firstCell = this.$root.find(`[data-id="1:1"]`)
         this.selectCell(firstCell)
+        this.$subscribe('toolbar:ApplyStyle', (style) => {
+            this.selection.applyStyle(style)
+        })
     }
 
     selectCell(cell) {
