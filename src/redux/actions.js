@@ -1,4 +1,4 @@
-import {CELLS_CONTENT, TABLE_RESIZE} from '@/redux/types';
+import {CELLS_CONTENT, TABLE_RESIZE} from '@/redux/types'
 
 export function tableResize(data) {
     return {

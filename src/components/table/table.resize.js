@@ -1,4 +1,4 @@
-import {$} from '@core/dom';
+import {$} from '@core/dom'
 
 export default function resizing(event, $root) {
     return new Promise( resolve => {

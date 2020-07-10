@@ -1,19 +1,15 @@
-import {ExcelComponent} from '@core/ExcelComponent';
-import createTable from '@/components/table/table.template';
+import {ExcelComponent} from '@core/ExcelComponent'
+import createTable from '@/components/table/table.template'
 import {$} from '@core/dom'
-import resizing from '@/components/table/table.resize';
-import {TableSelection} from '@/components/table/TableSelection';
+import resizing from '@/components/table/table.resize'
+import {TableSelection} from '@/components/table/TableSelection'
 import {
     getCellsGroup,
     isResize,
     isSelect,
     getNextElement
-} from '@/components/table/table.functions';
-// import {TABLE_RESIZE} from '@/redux/types';
-import {cellContentAction, tableResize} from '@/redux/actions';
-import {defaultStyles} from '@/constants';
-// import {CELLS_CONTENT} from '@/redux/types';
-// import {storage} from '@core/utils';
+} from '@/components/table/table.functions'
+import {cellContentAction, tableResize} from '@/redux/actions'
 
 
 export class Table extends ExcelComponent {

@@ -1,13 +1,13 @@
-const path = require('path'); //Предоставляет утилиты для работы с путями
+const path = require('path') //Предоставляет утилиты для работы с путями
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const isProd = process.env.NODE_ENV === 'production'; //Определяем режимы сборки
+const isProd = process.env.NODE_ENV === 'production' //Определяем режимы сборки
 const isDev = !isProd
 
-const fileName = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`;
+const fileName = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`
 
 const jsLoader = () => {
     const loaders = [

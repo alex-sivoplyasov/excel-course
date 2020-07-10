@@ -1,6 +1,6 @@
-import {$} from '@core/dom';
-import {range} from '@core/utils';
-import {Table} from '@/components/table/Table';
+import {$} from '@core/dom'
+import {range} from '@core/utils'
+import {Table} from '@/components/table/Table'
 
 export function isResize(event) {
     return event.target.dataset.resize

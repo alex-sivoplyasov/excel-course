@@ -1,7 +1,7 @@
 // import {$} from '@core/dom'
 
 //Char codes for symbols
-import {Table} from '@/components/table/Table';
+import {Table} from '@/components/table/Table'
 
 const CODES = {
     A: 65,
