@@ -1,2 +1,4 @@
 export const TABLE_RESIZE = 'TABLE_RESIZE'
 export const CELLS_CONTENT = 'CELLS_CONTENT'
+export const CHANGE_STYLES = 'CHANGE_STYLES'
+export const APPLY_STYLE = 'APPLY_STYLE'

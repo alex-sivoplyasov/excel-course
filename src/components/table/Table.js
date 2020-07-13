@@ -9,7 +9,8 @@ import {
     isSelect,
     getNextElement
 } from '@/components/table/table.functions'
-import {cellContentAction, tableResize} from '@/redux/actions'
+import {cellContentAction, changeStyles, tableResize} from '@/redux/actions'
+import {defaultStyles} from '@/constants';
 
 
 export class Table extends ExcelComponent {
@@ -110,6 +111,9 @@ export class Table extends ExcelComponent {
     selectCell(cell) {
         this.selection.select(cell)
         this.$emit('table:select', cell.text())
+        const styles = cell.getStyles(Object.keys(defaultStyles))
+        this.$dispatch(changeStyles(styles))
+        console.log('styles Table', styles)
     }
 
 
