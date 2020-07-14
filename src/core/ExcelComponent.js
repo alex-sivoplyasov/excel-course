@@ -39,9 +39,6 @@ export class ExcelComponent extends DomListener{
     }
 
     isWatching(key) {
-        // console.log(this.subscribe.includes(key))
-        // console.log(this.subscribe)
-        // console.log(key)
         return this.subscribe.includes(key)
     }
 

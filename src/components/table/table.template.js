@@ -3,6 +3,7 @@
 //Char codes for symbols
 import {Table} from '@/components/table/Table'
 import {toInlineStyles} from '@core/utils';
+import {defaultStyles} from '@/constants';
 // import {defaultStyles} from '@/constants';
 // import {toInlineStyles} from '@core/utils';
 
@@ -19,15 +20,16 @@ function createCell(state, row) {
         const width = getWidth(col, state.colState)
         const id = `${row + 1}:${col + 1}`
         const content = getContent(id, state.cellsContent)
-        const styles = toInlineStyles(state.stylesState[id])
-        // console.log(styles)
+        const styles = toInlineStyles({...defaultStyles, ...state.stylesState[id]})
+        console.log(`styles: ${id}`, styles)
+        // console.log(state.stylesState[id])
         return `
             <div 
                 class="cell" 
                 contenteditable 
                 data-col="${col + 1}" 
                 data-id="${id}"
-                style="${styles}  width: ${width}"
+                style="${styles};  width: ${width}"
                 >
                 ${content}
             </div>

@@ -1,5 +1,4 @@
 //Pure functions
-import {defaultStyles} from '@/constants';
 
 export function capitalize(string) {
     if (typeof string !== 'string')
@@ -35,7 +34,7 @@ export function isEqual(a, b) {
 export function toInlineStyles(style = {}) {
     return Object.keys(style)
         .map( key => {
-            return `${camelCaseToDash(key)}:${defaultStyles[key]}`
+            return `${camelCaseToDash(key)}:${style[key]}`
         })
         .join(';')
 }
