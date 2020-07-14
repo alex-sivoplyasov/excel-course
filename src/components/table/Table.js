@@ -10,8 +10,8 @@ import {
     getNextElement
 } from '@/components/table/table.functions'
 import {cellContentAction, changeStyles, tableResize} from '@/redux/actions'
-import {defaultStyles} from '@/constants';
-
+import {defaultStyles} from '@/constants'
+import * as actions from '@/redux/actions'
 
 export class Table extends ExcelComponent {
     static className = 'excel__table'
@@ -103,8 +103,12 @@ export class Table extends ExcelComponent {
         super.init()
         const firstCell = this.$root.find(`[data-id="1:1"]`)
         this.selectCell(firstCell)
-        this.$subscribe('toolbar:ApplyStyle', (style) => {
-            this.selection.applyStyle(style)
+        this.$subscribe('toolbar:ApplyStyle', (value) => {
+            this.selection.applyStyle(value)
+            this.$dispatch(actions.applyStyle({
+                value,
+                ids: this.selection.selectedIds
+            }))
         })
     }
 

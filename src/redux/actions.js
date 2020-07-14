@@ -1,4 +1,9 @@
-import {CELLS_CONTENT, CHANGE_STYLES, TABLE_RESIZE} from '@/redux/types'
+import {
+    APPLY_STYLE,
+    CELLS_CONTENT,
+    CHANGE_STYLES,
+    TABLE_RESIZE
+} from '@/redux/types'
 
 export function tableResize(data) {
     return {
@@ -21,3 +26,9 @@ export function changeStyles(data) {
     }
 }
 
+export function applyStyle(data) {
+    return {
+        type: APPLY_STYLE,
+        data
+    }
+}

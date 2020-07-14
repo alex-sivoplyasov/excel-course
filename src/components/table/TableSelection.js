@@ -32,4 +32,8 @@ export class TableSelection {
             cell.css(style)
         })
     }
+
+    get selectedIds() {
+        return this.group.map($el => $el.id())
+    }
 }

@@ -2,7 +2,9 @@
 
 //Char codes for symbols
 import {Table} from '@/components/table/Table'
-import {defaultStyles} from '@/constants';
+import {toInlineStyles} from '@core/utils';
+// import {defaultStyles} from '@/constants';
+// import {toInlineStyles} from '@core/utils';
 
 const CODES = {
     A: 65,
@@ -17,11 +19,7 @@ function createCell(state, row) {
         const width = getWidth(col, state.colState)
         const id = `${row + 1}:${col + 1}`
         const content = getContent(id, state.cellsContent)
-        const styles = Object.keys(defaultStyles)
-            .map( key => {
-                return `${camelCaseToDash(key)}:${defaultStyles[key]}`
-            })
-            .join(';')
+        const styles = toInlineStyles(state.stylesState[id])
         // console.log(styles)
         return `
             <div 
@@ -88,7 +86,8 @@ function withWidthFrom(state) {
     }
 }
 
-function getContent(id, state) {
+function getContent(id, state = {}) {
+    // debugger
     return state[id] || ''
 }
 
@@ -119,6 +118,3 @@ export default function createTable(rowsCount = 10, state = {}) {
     return rows.join('')
 }
 
-function camelCaseToDash(str) {
-    return str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
-}
