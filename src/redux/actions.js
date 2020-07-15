@@ -1,7 +1,7 @@
 import {
     APPLY_STYLE,
     CELLS_CONTENT,
-    CHANGE_STYLES,
+    CHANGE_STYLES, TABLE_NAME,
     TABLE_RESIZE
 } from '@/redux/types'
 
@@ -29,6 +29,14 @@ export function changeStyles(data) {
 export function applyStyle(data) {
     return {
         type: APPLY_STYLE,
+        data
+    }
+}
+
+export function setTableName(data) {
+    console.log('data set', data)
+    return {
+        type: TABLE_NAME,
         data
     }
 }

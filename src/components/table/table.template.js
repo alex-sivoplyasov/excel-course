@@ -21,8 +21,7 @@ function createCell(state, row) {
         const id = `${row + 1}:${col + 1}`
         const content = getContent(id, state.cellsContent)
         const styles = toInlineStyles({...defaultStyles, ...state.stylesState[id]})
-        console.log(`styles: ${id}`, styles)
-        // console.log(state.stylesState[id])
+
         return `
             <div 
                 class="cell" 

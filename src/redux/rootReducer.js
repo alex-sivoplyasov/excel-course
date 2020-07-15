@@ -1,7 +1,7 @@
 import {
     APPLY_STYLE,
     CELLS_CONTENT,
-    CHANGE_STYLES,
+    CHANGE_STYLES, TABLE_NAME,
     TABLE_RESIZE
 } from '@/redux/types'
 // import {toInlineStyles} from '@core/utils';
@@ -31,6 +31,8 @@ export function rootReducer(state, action) {
             [field]: val,
             currentStyles: {...state.currentStyles, ...action.data.value}
         }
+    case TABLE_NAME:
+        return {...state, tableName: action.data}
     default:
         return state
     }
