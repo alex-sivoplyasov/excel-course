@@ -15,7 +15,7 @@ class Dom {
     }
 
     text(text) {
-        if (typeof text === 'string') {
+        if (typeof text === 'string' || typeof text === 'number') {
             this.$el.textContent = text
             return this
         }
