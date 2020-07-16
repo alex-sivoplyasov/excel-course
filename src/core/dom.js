@@ -15,13 +15,14 @@ class Dom {
     }
 
     text(text) {
-        if (text) {
+        if (typeof text === 'string') {
             this.$el.textContent = text
             return this
-        } else {
-            return this.$el.textContent
         }
-        // this.$el.textContent = text
+        if (this.$el.tagName.toLowerCase() === 'input') {
+            return this.$el.value.trim()
+        }
+        return this.$el.textContent.trim()
     }
 
     addClass(className) {
@@ -72,6 +73,14 @@ class Dom {
 
     on(listener, callback) {
         this.$el.addEventListener(listener, callback)
+    }
+
+    attr(name, value) {
+        if (value) {
+            this.$el.setAttribute(name, value)
+            return this
+        }
+        return this.$el.getAttribute(name)
     }
 
     off(listener, callback) {

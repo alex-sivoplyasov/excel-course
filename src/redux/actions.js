@@ -34,7 +34,6 @@ export function applyStyle(data) {
 }
 
 export function setTableName(data) {
-    console.log('data set', data)
     return {
         type: TABLE_NAME,
         data

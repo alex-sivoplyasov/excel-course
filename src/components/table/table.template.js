@@ -1,11 +1,8 @@
-// import {$} from '@core/dom'
-
-//Char codes for symbols
 import {Table} from '@/components/table/Table'
-import {toInlineStyles} from '@core/utils';
-import {defaultStyles} from '@/constants';
-// import {defaultStyles} from '@/constants';
-// import {toInlineStyles} from '@core/utils';
+import {toInlineStyles} from '@core/utils'
+import {defaultStyles} from '@/constants'
+import {parse} from '@/components/table/parse'
+
 
 const CODES = {
     A: 65,
@@ -29,8 +26,9 @@ function createCell(state, row) {
                 data-col="${col + 1}" 
                 data-id="${id}"
                 style="${styles};  width: ${width}"
+                data-value="${content}"
                 >
-                ${content}
+                ${parse(content)}
             </div>
         `
     }
