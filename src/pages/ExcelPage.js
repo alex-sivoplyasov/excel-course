@@ -28,6 +28,7 @@ export class ExcelPage extends Page {
     }
 
     afterRender() {
+        console.log('excel init')
         this.excel.init()
     }
 
