@@ -1,4 +1,5 @@
 import {DomListener} from '@core/DomListener'
+import {setOpeningDate} from '@/redux/actions';
 
 export class ExcelComponent extends DomListener{
     constructor($root, options = {}) {
@@ -56,6 +57,7 @@ export class ExcelComponent extends DomListener{
     //Инициализируем компонент и добавляем слушателей
     init() {
         this.initDOMListeners()
+        this.$dispatch( setOpeningDate( Date.now()))
     }
 
     //Удаляем компонент и слушателей

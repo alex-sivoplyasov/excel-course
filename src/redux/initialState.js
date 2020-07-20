@@ -10,6 +10,7 @@ const defaultState = {
     currentStyles: defaultStyles,
     stylesState: {},
     tableName: defaultTitle,
+    openingDate: Date.now()
 }
 const normalize = state => ({
     ...state,
@@ -19,5 +20,8 @@ const normalize = state => ({
 
 
 export function normalizeInitialState(state) {
+    console.log(Date.now())
+    const test = Date.now()
+    console.log('type ', typeof test)
     return state ? normalize(state) : clone(defaultState)
 }

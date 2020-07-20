@@ -1,12 +1,14 @@
 import {storage} from '@core/utils';
 
-function toHTML(stateName, element) {
-    const tableName = storage(stateName).tableName
-    const id = getID(stateName)
+function toHTML(storageName, element) {
+    const storageItem = storage(storageName)
+    const id = getID(storageName)
+    const openingDate = new Date( storageItem.openingDate)
+
     return `
         <li class="db__record">
-             <a href="#excel/${id}"> ${tableName} </a>
-             <strong>${id}</strong>
+             <a href="#excel/${id}"> ${storageItem.tableName} </a>
+             <strong>${openingDate.toLocaleString()}</strong>
         </li>
     `
 }
@@ -14,10 +16,6 @@ function toHTML(stateName, element) {
 function getID(stateName) {
     return stateName.split(':')[1]
 }
-
-// function getData() {
-//
-// }
 
 function getAllKeys() {
     const keys = []
