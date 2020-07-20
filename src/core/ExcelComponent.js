@@ -19,13 +19,13 @@ export class ExcelComponent extends DomListener{
 
     //Уведомляем слушателя о событии event
     $emit(event, ...args) {
-        const unsub = this.emitter.emit(event, ...args)
-        this.unsubscribers.push(unsub)
+        this.emitter.emit(event, ...args)
     }
 
     //Подписываемся на событие event
     $subscribe(event, fn) {
-        this.emitter.subscribe(event, fn)
+        const unsub = this.emitter.subscribe(event, fn)
+        this.unsubscribers.push(unsub)
     }
 
     //Уведомление redux
@@ -62,6 +62,6 @@ export class ExcelComponent extends DomListener{
     destroy() {
         this.removeDOMListeners()
         this.unsubscribers.forEach( unsub => unsub())
-        this.storeSub.unsubscribe()
+        // this.storeSub.unsubscribe()
     }
 }
