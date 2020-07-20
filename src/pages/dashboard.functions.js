@@ -1,15 +1,23 @@
-function toHTML() {
+import {storage} from '@core/utils';
+
+function toHTML(stateName, element) {
+    const tableName = storage(stateName).tableName
+    const id = getID(stateName)
     return `
         <li class="db__record">
-             <a href="#">Table 1</a>
-             <strong>23.23.1234</strong>
+             <a href="#excel/${id}"> ${tableName} </a>
+             <strong>${id}</strong>
         </li>
     `
 }
 
-export function getAllRecords() {
-
+function getID(stateName) {
+    return stateName.split(':')[1]
 }
+
+// function getData() {
+//
+// }
 
 function getAllKeys() {
     const keys = []
