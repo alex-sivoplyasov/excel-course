@@ -20,7 +20,6 @@ export class ExcelPage extends Page {
         const state = storage(storageName(params))
         const initialState = normalizeInitialState(state)
         const store = createStore(rootReducer, initialState)
-        // debounce()
         const stateListener = debounce(state => {
             storage(storageName(params), state)
         }, 2000)

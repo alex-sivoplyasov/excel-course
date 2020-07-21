@@ -1,4 +1,5 @@
 const path = require('path') //Предоставляет утилиты для работы с путями
+const webpack = require('webpack')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
@@ -31,7 +32,6 @@ module.exports = {
     mode: 'development', //Режим работы проекта по умолчанию - разработка
     entry: ['@babel/polyfill', './index.js'], //Точка входа,
     output: {
-        // filename: 'bundle.[hash].js',
         filename: fileName('js'),
         path: path.resolve(__dirname, 'dist')
     },
@@ -68,9 +68,10 @@ module.exports = {
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: fileName('css'),
-            // filename: 'bundle.[hash].css',
-            // chunkFilename: '[id].css',
         }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+        })
     ],
     module: {
         rules: [

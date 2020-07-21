@@ -33,7 +33,6 @@ export function rootReducer(state, action) {
     case TABLE_NAME:
         return {...state, tableName: action.data}
     case OPENING_DATE:
-        console.log(action)
         return {...state, openingDate: action.data}
     default:
         return state

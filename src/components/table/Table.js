@@ -9,10 +9,9 @@ import {
     isSelect,
     getNextElement
 } from '@/components/table/table.functions'
-// import {cellContentAction, changeStyles, tableResize} from '@/redux/actions'
 import {defaultStyles} from '@/constants'
 import * as actions from '@/redux/actions'
-import {parse} from '@/components/table/parse';
+import {parse} from '@/components/table/parse'
 
 export class Table extends ExcelComponent {
     static className = 'excel__table'
@@ -42,14 +41,12 @@ export class Table extends ExcelComponent {
         }
 
         if (isSelect(event)) {
-            // this.$emit('table:select', $(event.target).text())
             if (event.shiftKey) {
                 const target = $(event.target).id(true)
                 const current = this.selection.current.id(true)
                 const cells = getCellsGroup(target, current)
                 this.selection.selectGroup(cells)
             } else {
-                // this.selection.select($(event.target))
                 this.selectCell($(event.target))
             }
         }
@@ -63,14 +60,6 @@ export class Table extends ExcelComponent {
     }
 
     onInput(event) {
-        // const text = event.target.textContent
-        // const cellId = $(event.target).data.id
-        // const data = {
-        //     id: cellId,
-        //     value: text
-        // }
-        // this.$emit('table:input', text)
-        // this.$dispatch(cellContentAction(data))
         this.updateTextInStore($(event.target).text())
     }
 
@@ -91,8 +80,6 @@ export class Table extends ExcelComponent {
             const ids = this.selection.current.id(true)
             const $next = getNextElement(key, ids)
             this.selectCell($next)
-            // this.selection.select($next)
-            // this.$emit('table:select', $next.text())
         }
     }
 

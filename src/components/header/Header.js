@@ -1,9 +1,9 @@
 import {ExcelComponent} from '@core/ExcelComponent'
 import {$} from '@core/dom'
-import {setTableName} from '@/redux/actions';
-import {defaultTitle} from '@/constants';
-import {ActiveRoute} from '@core/routes/ActiveRoute';
-import {storageName} from '@/pages/ExcelPage';
+import {setTableName} from '@/redux/actions'
+import {defaultTitle} from '@/constants'
+import {ActiveRoute} from '@core/routes/ActiveRoute'
+import {storageName} from '@/pages/ExcelPage'
 
 export class Header extends ExcelComponent{
     constructor($root, options) {

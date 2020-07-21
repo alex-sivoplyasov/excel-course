@@ -1,4 +1,4 @@
-import {storage} from '@core/utils';
+import {storage} from '@core/utils'
 
 function toHTML(storageName, element) {
     const storageItem = storage(storageName)
@@ -33,7 +33,7 @@ function getAllKeys() {
 export function createRecordsTable() {
     const keys = getAllKeys()
     if (!keys.length)
-        return 'Вы пока не создали ни одной аблицы'
+        return 'Вы пока не создали ни одной таблицы'
 
     return `
         <div class="db__list-header">

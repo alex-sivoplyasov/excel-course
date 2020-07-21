@@ -86,7 +86,6 @@ function withWidthFrom(state) {
 }
 
 function getContent(id, state = {}) {
-    // debugger
     return state[id] || ''
 }
 

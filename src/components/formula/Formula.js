@@ -1,6 +1,4 @@
 import {ExcelComponent} from '@core/ExcelComponent'
-// import {Emitter} from '@core/Emitter';
-
 
 export class Formula extends ExcelComponent {
     static className = 'excel__formula'
@@ -12,7 +10,6 @@ export class Formula extends ExcelComponent {
             subscribe: ['currentText'],
             ...options
         })
-        // this.subscribe = ['currentText']
     }
 
     storeChanged(changes) {

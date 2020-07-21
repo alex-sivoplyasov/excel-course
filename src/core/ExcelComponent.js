@@ -1,5 +1,5 @@
 import {DomListener} from '@core/DomListener'
-import {setOpeningDate} from '@/redux/actions';
+import {setOpeningDate} from '@/redux/actions'
 
 export class ExcelComponent extends DomListener{
     constructor($root, options = {}) {
@@ -43,12 +43,6 @@ export class ExcelComponent extends DomListener{
         return this.subscribe.includes(key)
     }
 
-    //Подписка redux
-    // $sub(fn) {
-    //     this.storeSub = this.store.subscribe(fn)
-    // }
-
-
     //Возвращает шаблон компонента
     toHTML() {
         return ''
@@ -64,6 +58,5 @@ export class ExcelComponent extends DomListener{
     destroy() {
         this.removeDOMListeners()
         this.unsubscribers.forEach( unsub => unsub())
-        // this.storeSub.unsubscribe()
     }
 }
