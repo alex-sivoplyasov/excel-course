@@ -6,12 +6,11 @@ class Dom {
     }
 
     html(html) {
-        if (html) {
+        if (typeof html === 'string') {
             this.$el.innerHTML = html
             return this
-        } else {
-            return this.$el.innerHTML
         }
+        return this.$el.outerHTML.trim()
     }
 
     text(text) {

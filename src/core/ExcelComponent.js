@@ -1,4 +1,5 @@
 import {DomListener} from '@core/DomListener'
+import {setOpeningDate} from '@/redux/actions'
 
 export class ExcelComponent extends DomListener{
     constructor($root, options = {}) {
@@ -19,13 +20,13 @@ export class ExcelComponent extends DomListener{
 
     //Уведомляем слушателя о событии event
     $emit(event, ...args) {
-        const unsub = this.emitter.emit(event, ...args)
-        this.unsubscribers.push(unsub)
+        this.emitter.emit(event, ...args)
     }
 
     //Подписываемся на событие event
     $subscribe(event, fn) {
-        this.emitter.subscribe(event, fn)
+        const unsub = this.emitter.subscribe(event, fn)
+        this.unsubscribers.push(unsub)
     }
 
     //Уведомление redux
@@ -42,12 +43,6 @@ export class ExcelComponent extends DomListener{
         return this.subscribe.includes(key)
     }
 
-    //Подписка redux
-    // $sub(fn) {
-    //     this.storeSub = this.store.subscribe(fn)
-    // }
-
-
     //Возвращает шаблон компонента
     toHTML() {
         return ''
@@ -56,12 +51,12 @@ export class ExcelComponent extends DomListener{
     //Инициализируем компонент и добавляем слушателей
     init() {
         this.initDOMListeners()
+        this.$dispatch( setOpeningDate( Date.now()))
     }
 
     //Удаляем компонент и слушателей
     destroy() {
         this.removeDOMListeners()
         this.unsubscribers.forEach( unsub => unsub())
-        this.storeSub.unsubscribe()
     }
 }

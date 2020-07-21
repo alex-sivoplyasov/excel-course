@@ -38,7 +38,7 @@ export function toInlineStyles(style = {}) {
 }
 
 export function camelCaseToDash(str) {
-    return str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
+    return str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`)
 }
 
 export function debounce(fn, wait) {
@@ -51,4 +51,12 @@ export function debounce(fn, wait) {
         clearTimeout()
         timeout = setTimeout(later, wait)
     }
+}
+
+export function clone(obj) {
+    return JSON.parse(JSON.stringify(obj))
+}
+
+export function preventDefault(event) {
+    event.preventDefault()
 }

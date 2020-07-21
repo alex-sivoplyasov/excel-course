@@ -1,10 +1,9 @@
 import {
     APPLY_STYLE,
     CELLS_CONTENT,
-    CHANGE_STYLES, TABLE_NAME,
+    CHANGE_STYLES, OPENING_DATE, TABLE_NAME,
     TABLE_RESIZE
 } from '@/redux/types'
-// import {toInlineStyles} from '@core/utils';
 
 export function rootReducer(state, action) {
     let field
@@ -33,6 +32,8 @@ export function rootReducer(state, action) {
         }
     case TABLE_NAME:
         return {...state, tableName: action.data}
+    case OPENING_DATE:
+        return {...state, openingDate: action.data}
     default:
         return state
     }

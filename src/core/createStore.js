@@ -17,7 +17,6 @@ export function createStore(rootReducer, initialState = {}) {
         },
         getState() {
             return JSON.parse(JSON.stringify(state)) //Для избежания мутирования объекта
-            // return state
         }
     }
 }

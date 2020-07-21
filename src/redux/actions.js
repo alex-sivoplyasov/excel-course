@@ -1,7 +1,7 @@
 import {
     APPLY_STYLE,
     CELLS_CONTENT,
-    CHANGE_STYLES, TABLE_NAME,
+    CHANGE_STYLES, OPENING_DATE, TABLE_NAME,
     TABLE_RESIZE
 } from '@/redux/types'
 
@@ -36,6 +36,13 @@ export function applyStyle(data) {
 export function setTableName(data) {
     return {
         type: TABLE_NAME,
+        data
+    }
+}
+
+export function setOpeningDate(data) {
+    return {
+        type: OPENING_DATE,
         data
     }
 }

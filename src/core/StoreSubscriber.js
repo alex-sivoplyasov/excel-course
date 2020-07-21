@@ -17,6 +17,9 @@ export class StoreSubscriber {
                             const change = {[key]: state[key]}
                             component.storeChanged(change)
                             this.prevState = this.store.getState()
+                            if ( process.env.NODE_ENV === 'development') {
+                                window['redux'] = this.prevState
+                            }
                         }
                     })
                 }
